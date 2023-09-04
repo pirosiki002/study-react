@@ -1,0 +1,4 @@
+.title, .description{
+  text-transform: capitalize;
+  color: purple;
+}
