@@ -9,11 +9,17 @@ import Link from 'next/link';
 export default function Home() {
   const foo = 1;
 
-  const handleClick =useCallback((e)=>{
-    console.log(e.target.href);
+  // const handleClick =useCallback((e)=>{
+  //   console.log(e.target.href);
+  //   e.preventDefault();
+  //   alert(foo);
+  // }, []);
+
+  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    console.log(e.currentTarget.href);
     e.preventDefault();
     alert(foo);
-  }, []);
+  });
 
   return (
     <div className={classes.container}>
