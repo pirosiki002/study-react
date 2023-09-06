@@ -19,7 +19,7 @@ export default function Home() {
     console.log(e.currentTarget.href);
     e.preventDefault();
     alert(foo);
-  });
+  }, []);
 
   return (
     <div className={classes.container}>
