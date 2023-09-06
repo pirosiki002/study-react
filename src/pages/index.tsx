@@ -4,6 +4,7 @@ import { Main } from "src/components/Main";
 import classes from "src/styles/Home.module.css";
 import { Header } from "src/components/Header";
 import { useCallback } from "react";
+import Link from 'next/link';
 
 export default function Home() {
   const foo = 1;
@@ -20,12 +21,12 @@ export default function Home() {
         <title>Index Page</title>
       </Head>
       <Header />
-      <a
+      <Link
         href="/about"
         onClick={handleClick}
       >
         Button
-      </a>
+      </Link>
       <Main page="index" />
       <Footer />
     </div>
