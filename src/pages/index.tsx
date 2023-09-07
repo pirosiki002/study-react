@@ -3,27 +3,23 @@ import { Footer } from "src/components/Footer";
 import { Main } from "src/components/Main";
 import classes from "src/styles/Home.module.css";
 import { Header } from "src/components/Header";
-import { useCallback, useEffect} from "react";
-import Link from 'next/link';
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const foo = 1;
+  const[count, setCount]  = useState(1);
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    console.log(e.currentTarget.href);
-    e.preventDefault();
-    alert(foo);
-  }, []);
+  const handleClick = (e) => {
+    setCount((count) => count + 1);
+    setCount((count) => count + 1);
+  };
 
   useEffect(() => {
-    console.log("mount");
     document.body.style.backgroundColor = "lightblue";
 
-    return () =>{
-      console.log("unmount");
+    return () => {
       document.body.style.backgroundColor = "";
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <div className={classes.container}>
@@ -31,12 +27,12 @@ export default function Home() {
         <title>Index Page</title>
       </Head>
       <Header />
-      <Link
-        href="/about"
-        onClick={handleClick}
-      >
-        Button
-      </Link>
+      <div className={classes.centerContent}>
+        <h1>{count}</h1>
+        <button onClick={handleClick}>
+          Button
+        </button>
+      </div>
       <Main page="index" />
       <Footer />
     </div>
