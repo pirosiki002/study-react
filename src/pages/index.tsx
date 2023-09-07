@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const[count, setCount]  = useState(1);
 
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setCount((count) => count + 1);
     setCount((count) => count + 1);
   };
