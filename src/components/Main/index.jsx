@@ -7,6 +7,7 @@ import { Headline } from "src/components/Headline";
 const inter = Inter({ subsets: ["latin"] });
 
 export function Main(props) {
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
