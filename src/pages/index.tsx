@@ -6,15 +6,27 @@ import { Header } from "src/components/Header";
 import { useCallback, useEffect, useState } from "react";
 
 export default function Home() {
-  const[count, setCount]  = useState(1);
+  const [count, setCount] = useState(1);
+  const [text, setText] = useState("");
+  const [isShow, setIsShow] = useState(true);
 
   const handleClick = useCallback(() => {
-      if(count < 10){
-        setCount((count) => count + 1);
-      }
-    },
-    [count]
-  );
+    if (count < 10) {
+      setCount((count) => count + 1);
+    }
+  }, [count]);
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length > 5) {
+      alert("Please enter up to 5 letters.");
+      return;
+    }
+    setText(e.target.value.trim());
+  }, []);
+
+  const handleDisplay = useCallback(() => {
+    setIsShow((isShow: boolean) => !isShow);
+  }, []);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -24,6 +36,7 @@ export default function Home() {
     };
   }, []);
 
+
   return (
     <div className={classes.container}>
       <Head>
@@ -31,10 +44,12 @@ export default function Home() {
       </Head>
       <Header />
       <div className={classes.centerContent}>
-        <h1>{count}</h1>
-        <button onClick={handleClick}>
-          Button
+        {isShow ? <h1>{count}</h1> : null}
+        <button onClick={handleClick}>Button</button>
+        <button onClick={handleDisplay}>
+          {isShow ? "undisplay" : "display"}
         </button>
+        <input type="text" value={text} onChange={handleChange}></input>
       </div>
       <Main page="index" />
       <Footer />
