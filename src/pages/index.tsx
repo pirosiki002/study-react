@@ -9,6 +9,7 @@ export default function Home() {
   const [count, setCount] = useState(1);
   const [text, setText] = useState("");
   const [isShow, setIsShow] = useState(true);
+  const [array, setArray] = useState<string[]>([]);
 
   const handleClick = useCallback(() => {
     if (count < 10) {
@@ -27,6 +28,16 @@ export default function Home() {
   const handleDisplay = useCallback(() => {
     setIsShow((prevIsShow: boolean) => !prevIsShow);
   }, []);
+
+  const handleAdd = useCallback(() => {
+    setArray((prevArray) => {
+      if(prevArray.some(item => item === text)){
+        alert("same element!!");
+        return prevArray;
+      }
+      return [...prevArray, text];
+    });
+  },[text]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -50,6 +61,14 @@ export default function Home() {
           {isShow ? "undisplay" : "display"}
         </button>
         <input type="text" value={text} onChange={handleChange}></input>
+        <button onClick={handleAdd} >Add</button>
+        <ul>
+          {array.map(item => {
+            return(
+              <li key={item}>{item}</li>
+            )
+          })}
+        </ul>
       </div>
       <Main page="index" />
       <Footer />
