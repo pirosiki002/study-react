@@ -3,50 +3,14 @@ import { Footer } from "src/components/Footer";
 import { Main } from "src/components/Main";
 import classes from "src/styles/Home.module.css";
 import { Header } from "src/components/Header";
-import { useCallback, useEffect, useState } from "react";
+import { useCounter } from "src/hooks/useCounter";
+import { useInputArray } from "src/hooks/useInputArray";
+import { useBgLightBlue } from "src/hooks/useBgLightBlue";
 
 export default function Home() {
-  const [count, setCount] = useState(1);
-  const [text, setText] = useState("");
-  const [isShow, setIsShow] = useState(true);
-  const [array, setArray] = useState<string[]>([]);
-
-  const handleClick = useCallback(() => {
-    if (count < 10) {
-      setCount((prevCount) => prevCount + 1);
-    }
-  }, [count]);
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 5) {
-      alert("Please enter up to 5 letters.");
-      return;
-    }
-    setText(e.target.value.trim());
-  }, []);
-
-  const handleDisplay = useCallback(() => {
-    setIsShow((prevIsShow: boolean) => !prevIsShow);
-  }, []);
-
-  const handleAdd = useCallback(() => {
-    setArray((prevArray) => {
-      if(prevArray.some(item => item === text)){
-        alert("same element!!");
-        return prevArray;
-      }
-      return [...prevArray, text];
-    });
-  },[text]);
-
-  useEffect(() => {
-    document.body.style.backgroundColor = "lightblue";
-
-    return () => {
-      document.body.style.backgroundColor = "";
-    };
-  }, []);
-
+  const {count, isShow, handleClick, handleDisplay} = useCounter();
+  const {text, array, handleChange, handleAdd} = useInputArray();
+  useBgLightBlue();
 
   return (
     <div className={classes.container}>
@@ -55,6 +19,7 @@ export default function Home() {
       </Head>
       <Header />
       <div className={classes.centerContent}>
+
         {isShow ? <h1>{count}</h1> : null}
         <button onClick={handleClick}>Button</button>
         <button onClick={handleDisplay}>
@@ -69,6 +34,7 @@ export default function Home() {
             )
           })}
         </ul>
+
       </div>
       <Main page="index" />
       <Footer />
