@@ -2,19 +2,51 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import {Links} from "src/components/Links";
 import { Headline } from "src/components/Headline";
-
+import { useCallback, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const ITEMS = [
+  {
+    href: "https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
+    title: "Docs",
+    description: "Find in-depth information about Next.js features and API.",
+  },
+  {
+    href: "https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
+    title: "Learn",
+    description:
+      "Learn about Next.js in an interactive course with&nbsp;quizzes!",
+  },
+  {
+    href: "https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
+    title: "Templates",
+    description:
+      "Discover and deploy boilerplate example Next.js&nbsp;projects.",
+  },
+  {
+    href: "https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app",
+    title: "DePIROy",
+    description:
+      "Instantly deploy your Next.js site to a shareable URL with Vercel.",
+  },
+];
+
 export function Main(props) {
+  const[items, setItems] = useState(ITEMS);
+  const handleReduce = useCallback(() => {
+    setItems(prevItems => {
+      return prevItems.slice(0, prevItems.length - 1);
+    })
+  },[]);
 
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <Headline page={props.page}>
-          <code className="font-mono font-bold">pages/{props.page}.tsx</code>
+        <Headline page={props.page}  handleReduce={handleReduce}>
+          <code className="font-mono font-bold">{items.length}</code>
         </Headline>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
@@ -46,7 +78,7 @@ export function Main(props) {
           priority
         />
       </div>
-      <Links />
+      <Links items={items}/>
     </main>
   );
 }
