@@ -19,8 +19,8 @@ type HomeProps = UseCounterReturnType & UseInputArrayReturnType;
 export default function About(props:HomeProps) {
 
   const {
-    count, isShow, handleClick, handleDisplay, // useCounterからのprops
-    text, array, handleChange, handleAdd,      // useInputArrayからのprops
+    doubleCount, isShow, handleClick, handleDisplay, // useCounterからのprops
+    text, array, handleChange, handleAdd,            // useInputArrayからのprops
   } = props;
 
   return (
@@ -30,7 +30,7 @@ export default function About(props:HomeProps) {
       </Head>
       <Header />
       <div className={classes.centerContent}>
-        {isShow ? <h1>{count}</h1> : null}
+        {isShow ? <h1>{doubleCount}</h1> : null}
         <button onClick={handleClick}>Button</button>
         <button onClick={handleDisplay}>
           {isShow ? "undisplay" : "display"}
