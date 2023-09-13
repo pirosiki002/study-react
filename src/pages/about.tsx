@@ -16,12 +16,7 @@ type UseCounterReturnType = ReturnType<typeof useCounter>;
 type UseInputArrayReturnType = ReturnType<typeof useInputArray>;
 type HomeProps = UseCounterReturnType & UseInputArrayReturnType;
 
-export default function About(props:HomeProps) {
-
-  const {
-    doubleCount, isShow, handleClick, handleDisplay, // useCounterからのprops
-    text, array, handleChange, handleAdd,            // useInputArrayからのprops
-  } = props;
+const About = (props:HomeProps) => {
 
   return (
     <div className={classes.container}>
@@ -30,15 +25,15 @@ export default function About(props:HomeProps) {
       </Head>
       <Header />
       <div className={classes.centerContent}>
-        {isShow ? <h1>{doubleCount}</h1> : null}
-        <button onClick={handleClick}>Button</button>
-        <button onClick={handleDisplay}>
-          {isShow ? "undisplay" : "display"}
+        {props.isShow ? <h1>{props.doubleCount}</h1> : null}
+        <button onClick={props.handleClick}>Button</button>
+        <button onClick={props.handleDisplay}>
+          {props.isShow ? "undisplay" : "display"}
         </button>
-        <input type="text" value={text} onChange={handleChange}></input>
-        <button onClick={handleAdd} >Add</button>
+        <input type="text" value={props.text} onChange={props.handleChange}></input>
+        <button onClick={props.handleAdd} >Add</button>
         <ul>
-          {array.map(item => {
+          {props.array.map(item => {
             return(
               <li key={item}>{item}</li>
             )
@@ -50,3 +45,5 @@ export default function About(props:HomeProps) {
     </div>
   );
 }
+
+export default About;

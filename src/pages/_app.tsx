@@ -6,7 +6,7 @@ import { useInputArray } from 'src/hooks/useInputArray';
 import { useBgColor } from '@/src/hooks/useBgColor';
 
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
 
   const counter = useCounter();
   const inputArray = useInputArray();
@@ -17,7 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="icon" href="/favicon.ico"></link>
       </Head>
-      <Component {...pageProps}{...counter}{...inputArray}/>
+      <Component {...pageProps} {...counter} {...inputArray} />
     </>
   );
-}
+};
+
+export default App;

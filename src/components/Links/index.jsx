@@ -1,11 +1,10 @@
-import { useCallback, useState } from "react";
 import classes from "src/components/Links/Links.module.css";
 
-export function Links({items}) {
+export const Links = (props) => {
 
   return (
     <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      {items.map((item) => {
+      {props.items.map((item) => {
         return (
           <a
             key={item.href}
